@@ -1,5 +1,6 @@
 package com.project.ecommerce.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,20 @@ public class ModelOrder {
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
 	 @Column(name = "id", nullable = false)
 	 private Long id;
+	 
+	 @Column(name="order_date",nullable = false)
+	 private LocalDateTime orderDate;
+	 /*
+	  * PENDING PAYMENT
+	  * ON HOLD
+	  * FAILED
+	  * CANCELLED
+	  * PROCESSING
+	  * REFUNDED
+	  * COMPLETED
+	  * */
+	 @Column(name="status")
+	 private String orderStatus;
 	 
 	 @ManyToOne(optional = false)
 	 @JoinColumn(name = "user_id", nullable = false)
@@ -58,6 +73,14 @@ public class ModelOrder {
 	}
 	 public void setQuantities(List<ModelOrderQuantity> quantities) {
 		this.quantities = quantities;
+	}
+
+	public LocalDateTime getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(LocalDateTime orderDate) {
+		this.orderDate = orderDate;
 	}
 }
 

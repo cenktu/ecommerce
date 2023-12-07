@@ -1,10 +1,16 @@
 package com.project.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -28,7 +34,20 @@ public class Product {
 	@Column(name="price",nullable = false)
 	private Double price;
 	
+	@Column(name="imageUrl",length = 512)
+	private String imageUrl; 
+	@OneToOne(mappedBy = "product",cascade = CascadeType.REMOVE,optional = false,orphanRemoval = true)
+	private Inventory inventory;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "category_id", nullable = false)
+	private Category category;
 	
+	public Inventory getInventory() {
+		return inventory;
+	}
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -59,4 +78,11 @@ public class Product {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
+	public String getImageUrl() {
+		return imageUrl;
+	}
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+	
 }

@@ -1,5 +1,7 @@
 package com.project.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,9 +29,9 @@ public class Address {
 	@Column(name = "city",nullable = false)
 	private String city;
 	
-	@Column(name = "county",nullable = false ,length =  75)
+	@Column(name = "country",nullable = false ,length =  75)
 	private String country;
-	
+	@JsonIgnore
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "user_id", nullable = false)
 	private ModelUser user;
